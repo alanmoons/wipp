@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  fetch('https://landingwipp-oa0n.onrender.com/api/session', {
+  fetch('http://localhost:4000/api/session', {
     headers: { 'Authorization': 'Bearer ' + token }
   })
     .then(res => {
@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
         contenidoModulo.innerHTML = `<p>Cargando archivos de ${modulo}...</p>`;
 
         try {
-          const res = await fetch(`https://landingwipp-oa0n.onrender.com/api/files/${modulo}`, {
+          const res = await fetch(`http://localhost:4000/api/files/${modulo}`, {
             headers: { 'Authorization': 'Bearer ' + token }
           });
 
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
               if (['png', 'jpg', 'jpeg', 'gif', 'svg'].includes(ext)) {
                 contenido = `
                   <div style="position: relative;">
-                    <img id="content-${nombre}" src="https://landingwipp-oa0n.onrender.com${url}" alt="${nombre}" style="max-width: 100%; margin-bottom: 10px; border: 1px solid #ccc;" />
+                    <img id="content-${nombre}" src="http://localhost:4000${url}" alt="${nombre}" style="max-width: 100%; margin-bottom: 10px; border: 1px solid #ccc;" />
                     <button class="btn-fullscreen" data-target-id="content-${nombre}">Pantalla completa</button>
                   </div>
                 `;
@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 contenido = `
                   <div style="position: relative;">
                     <video id="content-${nombre}" controls style="max-width: 100%; margin-bottom: 10px; border: 1px solid #ccc;">
-                      <source src="https://landingwipp-oa0n.onrender.com${url}" type="video/${ext}" />
+                      <source src="http://localhost:4000${url}" type="video/${ext}" />
                       Tu navegador no soporta video.
                     </video>
                     <button class="btn-fullscreen" data-target-id="content-${nombre}">Pantalla completa</button>
@@ -87,12 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
               } else if (ext === 'pdf') {
                 contenido = `
                   <div style="position: relative;">
-                    <embed id="content-${nombre}" src="https://landingwipp-oa0n.onrender.com${url}" type="application/pdf" width="100%" height="300px" style="margin-bottom: 10px;" />
+                    <embed id="content-${nombre}" src="http://localhost:4000${url}" type="application/pdf" width="100%" height="300px" style="margin-bottom: 10px;" />
                     <button class="btn-fullscreen" data-target-id="content-${nombre}">Pantalla completa</button>
                   </div>
                 `;
               } else {
-                contenido = `<a href="https://landingwipp-oa0n.onrender.com${url}" target="_blank" rel="noopener noreferrer">${nombre}</a>`;
+                contenido = `<a href="http://localhost:4000${url}" target="_blank" rel="noopener noreferrer">${nombre}</a>`;
               }
 
               html += `
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = new FormData(uploadFormModulo);
 
             try {
-              const resUpload = await fetch('https://landingwipp-oa0n.onrender.com/api/upload', {
+              const resUpload = await fetch('http://localhost:4000/api/upload', {
                 method: 'POST',
                 headers: {
                   'Authorization': 'Bearer ' + token
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
               if (!confirm(`¿Eliminar archivo ${filename}?`)) return;
 
               try {
-                const resDelete = await fetch(`https://landingwipp-oa0n.onrender.com/api/files/${modulo}/${filename}`, {
+                const resDelete = await fetch(`http://localhost:4000/api/files/${modulo}/${filename}`, {
                   method: 'DELETE',
                   headers: { 'Authorization': 'Bearer ' + token }
                 });

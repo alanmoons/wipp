@@ -43,9 +43,20 @@ app.use(session({
 }));
 
 // CORS
-const cors = require('cors');
+const allowedOrigins = [
+  'http://localhost:4000',
+  'https://digitalfactory.mx'
+];
+
 app.use(cors({
-  origin: 'http://localhost:4000',  // Cambia si frontend está en otro lugar
+  origin: function(origin, callback) {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('No permitido por CORS'));
+    }
+  },
   credentials: true
 }));
 

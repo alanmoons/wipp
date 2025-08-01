@@ -6,39 +6,32 @@ const cors = require('cors');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
-require('dotenv').config({ path: path.join(__dirname, '.env') });
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 
-const enviarCorreo = require('./mailer'); // Importa el módulo para enviar correos
+require('dotenv').config({ path: path.join(__dirname, '.env') });
+const enviarCorreo = require('./mailer');
+const config = require('./config');  // Importas configuración
 
 const app = express();
-const PORT = process.env.PORT || 4000;
 
-const JWT_SECRET = process.env.JWT_SECRET || 'mi_secreto_seguro_jwt';
-const JWT_EXPIRES_IN = '1d'; // 1 día
+const PORT = config.PORT;
+const JWT_SECRET = config.JWT_SECRET || 'mi_secreto_seguro_jwt'; // Por si acaso
+const JWT_EXPIRES_IN = config.JWT_EXPIRES_IN || '1d';            // Por si acaso
 
 // CORS
-app.use(cors({
-  origin: [
-    'http://localhost:4000',
-    'https://peppy-duckanoo-4588be.netlify.app'
-  ],
-  credentials: true
+app.use(cors(config.CORS_OPTIONS));
+
+app.use(session({
+  ...config.SESSION_OPTIONS,
+  store: MongoStore.create({ mongoUrl: config.MONGODB_URI }),
 }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// No cache headers
-app.use((req, res, next) => {
-  res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-  res.set('Pragma', 'no-cache');
-  res.set('Expires', '0');
-  res.set('Surrogate-Control', 'no-store');
-  next();
-});
-
-// MongoDB
-mongoose.connect(process.env.MONGODB_URI || process.env.MONGO_URI)
+// Conexión a MongoDB
+mongoose.connect(config.MONGODB_URI)
   .then(() => console.log('✅ Conectado a MongoDB'))
   .catch(err => {
     console.error('❌ Error al conectar a MongoDB:', err);
