@@ -18,7 +18,10 @@ const JWT_EXPIRES_IN = '1d'; // 1 día
 
 // CORS
 app.use(cors({
-  origin: 'http://localhost:4000',
+  origin: [
+    'http://localhost:3000', // para pruebas locales
+    'https://admirable-puppy-b14e75.netlify.app/' // tu frontend en Netlify
+  ],
   credentials: true
 }));
 
