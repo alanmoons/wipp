@@ -18,7 +18,10 @@ const JWT_EXPIRES_IN = '1d'; // 1 día
 
 // CORS
 app.use(cors({
-  origin: 'http://localhost:4000',
+  origin: [
+    'http://localhost:4000',
+    'https://peppy-duckanoo-4588be.netlify.app'
+  ],
   credentials: true
 }));
 
