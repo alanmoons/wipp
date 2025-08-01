@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Página Principal</title>
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+<header class="dashboard-header">
+  <button id="logoutBtn">Cerrar sesión</button>
+</header>
+  <div class="dashboard-container">
+    <div class="background-left"></div>
+
+    <div class="fixed-left-image">
+      <img src="assets/images/recuadrorojo.png" alt="Imagen fija izquierda" />
+    </div>
+
+    <div class="right-images-container">
+  <div class="image-box" data-modulo="modulo1">
+  <img src="assets/images/recuadro1.png" alt="Imagen 1" />
+  <div class="archivos-container" style="display:none; margin-top: 10px;"></div>
+  </div>
+  <div class="image-box" data-modulo="modulo2">
+  <img src="assets/images/recuadro2.png" alt="Imagen 2" />
+  <div class="archivos-container" style="display:none; margin-top: 10px;"></div>
+  </div>
+  <div class="image-box" data-modulo="modulo3">
+  <img src="assets/images/recuadro3.png" alt="Imagen 3" />
+  <div class="archivos-container" style="display:none; margin-top: 10px;"></div>
+  </div>
+  <div class="image-box" data-modulo="modulo4">
+  <img src="assets/images/recuadro4.png" alt="Imagen 4" />
+  <div class="archivos-container" style="display:none; margin-top: 10px;"></div>
+  </div>
+  <div class="image-box" data-modulo="modulo5">
+  <img src="assets/images/recuadro5.png" alt="Imagen 5" />
+  <div class="archivos-container" style="display:none; margin-top: 10px;"></div>
+  </div>
+  <div class="image-box placeholder"></div>
+</div>
+<!-- Contenedor para mostrar los archivos -->
+<div id="archivos-container" style="margin-top: 20px;"></div>
+  </div>
+
+  <script src="dashboard.js" defer></script>
+</body>
+</html>

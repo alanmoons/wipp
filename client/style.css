@@ -1,0 +1,194 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  font-family: sans-serif;
+}
+
+.fondo {
+  background-image: url('assets/images/fondoazul.png');
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.centro {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  padding-top: 40px;
+}
+.fondo-botones {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  z-index: 0; /* Sigue siendo fondo */
+}
+.centro,
+.formulario-container {
+  position: relative;
+  z-index: 1; /* Por encima del fondo-botones */
+}
+.boton {
+  position: relative;
+  z-index: 1;
+  max-width: 350px;
+  width: 90%;           /* Se ajusta al 80% del contenedor */
+  height: auto;         /* Mantiene proporción */
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  top: 30px;
+}
+.boton img {
+  display: block;
+  width: auto;  /* que no se estire ni achique */
+  height: auto; /* mantiene proporción */
+  max-width: 100%;
+}
+.boton:hover {
+  transform: scale(1.05);
+}
+.formulario-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 85px;
+}
+
+.formulario-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 300px;
+}
+
+.formulario-container input, .formulario-container button {
+  padding: 10px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+}
+
+.oculto {
+  display: none;
+} 
+/* Color y subrayado para el texto de los inputs */
+.formulario-container input {
+  color: #0ebcc8;
+  border-bottom: 2px solid #0ebcc8; /* subrayado visible */
+  background: transparent;
+  outline: none;
+}
+
+/* Color y subrayado para el placeholder (texto gris dentro del input) */
+.formulario-container input::placeholder {
+  color: #0ebcc8;
+  opacity: 1; /* para que el color del placeholder se vea igual en todos los navegadores */
+}
+.btn-registrarse {
+  display: block;
+  position: relative;
+  left: -8px;  /* mueve el botón 100px hacia la izquierda */
+  background-color: transparent;
+  border: none;
+  width: 320px;
+  height: 60px;
+  background-image: url('assets/images/registrarse.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  color: transparent;
+  text-indent: -9999px;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0;
+  transition: transform 0.2s ease;
+}
+.btn-registrarse:hover {
+  transform: scale(1.05);
+}
+.btn-iniciar {
+  display: block;
+  position: relative;
+  left: -8px;  /* mueve el botón 100px hacia la izquierda */
+  background-color: transparent;
+  border: none;
+  width: 320px;
+  height: 60px;
+  background-image: url('assets/images/iniciarsesion.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+  color: transparent;
+  text-indent: -9999px;
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 0;
+  transition: transform 0.2s ease;
+}
+.btn-iniciar:hover {
+  transform: scale(1.05);
+}
+#rememberMe {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px; /* hace el checkbox más redondeado */
+  cursor: pointer;
+}
+#loginForm a {
+  text-decoration: none;
+  color: black;
+}
+#loginForm a:hover {
+  color: #0ebcc8; /* o cualquier color que prefieras */
+  text-decoration: underline; /* opcional */
+}
+/* Responsividad */
+@media (max-width: 768px) {
+  .centro {
+    max-width: 400px;
+  }
+  .boton {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 480px) {
+  .centro {
+    max-width: 90%;
+    padding: 0 10px;
+  }
+  .boton {
+    max-width: 100%;
+  }
+}
+.formulario-container button.atras-btn {
+  background-color: transparent;
+  color: #0ebcc8;
+  border: none;
+  font-size: 1rem;
+  text-align: left;
+  padding: 5px 0;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  margin-bottom: 10px;
+}
+
+.formulario-container button.atras-btn:hover {
+  color: #028d97;
+} 

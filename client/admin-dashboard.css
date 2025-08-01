@@ -1,0 +1,573 @@
+html, body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;  /* deja oculto scroll horizontal para evitar "scroll lateral" */
+  overflow-y: auto;    /* ¡permite scroll vertical! */
+  width: 100vw;
+  min-height: 100vh;   /* mejor que height para que crezca si hace falta */
+  box-sizing: border-box;
+}
+h1 {
+  color: #007BFF;
+}
+.contenido {
+  margin-top: 20px;
+}
+
+.btn-red {
+  background-color: #ff4d4d;
+  border: none;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.btn-red:hover {
+  background-color: #ff1a1a;
+}
+
+.dashboard-header {
+  position: fixed;
+  top: 0;
+  left: 0;                
+  width: 100%;
+  height: 50px;
+  background-color: #222;
+  color: white;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  padding: 0 20px;       
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+  z-index: 10;
+  margin: 0;             
+}
+.header-title {
+  font-weight: bold;
+  font-size: 16px;
+  margin: 0;             
+  padding: 0;            
+}
+.dashboard-header button {
+  background-color: #ff4d4d;
+  border: none;
+  color: white;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+  margin: 0;              
+}
+
+.dashboard-header button:hover {
+  background-color: #ff1a1a;
+}
+
+.dashboard-container {
+  position: relative;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+}
+
+.background-left {
+  position: fixed;
+  left: 220px;
+  top: 0;
+  height: 100vh;
+  width: 500px;
+  background-image: url('assets/images/fondo.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+
+.fixed-left-image {
+  position: fixed;
+  left: 100px;
+  top: 0;
+  width: 500px;
+  height: 100vh;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.fixed-left-image img {
+  height: 50%;
+  width: auto;
+  object-fit: contain;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+
+.right-images-container {
+  position: fixed;
+  right: 0;
+  top: 50px; 
+  width: 800px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 30px;
+  box-sizing: border-box;
+  z-index: 3;
+  height: calc(100vh - 50px); 
+  align-content: center;
+  background-color: white;
+  overflow-y: auto;
+}
+
+.image-box img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.image-box img:hover {
+  transform: scale(1.03);
+  z-index: 10;
+}
+.image-box.placeholder {
+  background: none;
+  box-shadow: none;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* Responsividad para tablets */
+@media (max-width: 1024px) {
+  .background-left {
+    left: 150px;
+    width: 400px;
+  }
+  .fixed-left-image {
+    left: 50px;
+    width: 400px;
+  }
+  .right-images-container {
+    width: 600px;
+    grid-template-columns: 1fr 1fr;
+    padding: 20px;
+  }
+}
+
+
+.upload-section {
+  position: relative;
+  z-index: 20;
+  background: white;
+  padding: 20px;
+  margin-top: 40px;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  max-width: 600px;
+}
+
+.upload-section input,
+.upload-section button {
+  margin-top: 10px;
+}
+/* Header con menú y título */
+.menu-toggle {
+  position: relative;
+  margin-right: auto;
+  cursor: pointer;
+  font-size: 20px;
+  margin-left: 10px;
+}
+/* Contenedor derecho para las imágenes y contenido dinámico */
+.right-images-container {
+  position: fixed;
+  right: 0;
+  top: 50px;
+  width: 800px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 30px;
+  box-sizing: border-box;
+  z-index: 3;
+  height: calc(100vh - 50px);
+  align-content: start;
+  background-color: white;
+  overflow-y: auto;
+}
+
+/* El nuevo contenedor contenido-modulo estará debajo, ocupará todo el ancho */
+#contenido-modulo {
+  position: fixed; /* quitar fixed */
+  margin: 40px auto;  /* centrado horizontal y espacio superior */
+  max-width: 600px;   /* igual que el ejemplo Tailwind */
+  background: white;
+  padding: 24px;
+  border-radius: 24px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  border-top: none;   /* quitar borde superior */
+  max-height: none;
+  overflow-y: visible;
+  display: none;     /* mostrar */
+  transition: none;
+  z-index: auto;
+}
+
+/* Formulario de subida dentro de contenido-modulo */
+#contenido-modulo {
+  position: fixed;
+  right: 0;
+  top: 50px; /* solo para modo normal */
+  width: 800px;
+  background: white;
+  padding: 20px 30px;
+  box-sizing: border-box;
+  border-top: 1px solid #ddd;
+  max-height: calc(100vh - 50px);
+  overflow-y: auto;
+  display: none; /* Oculto hasta que se abra módulo */
+  transition: all 0.3s ease;
+}
+
+.contenido-modulo form {
+  margin-bottom: 20px;
+}
+
+.contenido-modulo img,
+.contenido-modulo video,
+.contenido-modulo embed,
+.contenido-modulo a {
+  max-width: 50%;
+  height: auto;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.archivo-item {
+  margin-bottom: 20px;
+}
+
+.archivo-item button.btn-delete {
+  background-color: #ff4d4d;
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background-color 0.3s;
+}
+
+.archivo-item button.btn-delete:hover {
+  background-color: #ff1a1a;
+}
+/* Oculta todo el dashboard menos el contenido del módulo */
+.fullscreen-module #contenido-modulo {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background-color: white;
+  z-index: 9999 !important;
+  overflow-y: auto;
+  padding: 20px !important;
+  box-sizing: border-box !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* Oculta todo lo que no sea el contenido del módulo */
+.fullscreen-module .dashboard-container > :not(#contenido-modulo) {
+  display: none !important;
+}
+
+.fullscreen-module header,
+.fullscreen-module #resultado {
+  display: none !important;
+}
+/* Botón pantalla completa */
+.btn-fullscreen {
+  display: inline-block;
+  margin-top: 5px;
+  background-color: #ff4d4d;
+  border: none;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  transition: background-color 0.3s;
+  /* quito position absolute */
+  /* quito z-index */
+}
+.btn-fullscreen:hover {
+  background-color: #ff1a1a;
+}
+/* Estilo moderno para el formulario */
+#uploadFormModulo {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+#uploadFormModulo label {
+  font-weight: bold;
+  color: #333;
+}
+
+#uploadFormModulo input[type="file"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+#uploadFormModulo button[type="submit"] {
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#uploadFormModulo button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Mejora visual del título */
+.titulo-modulo {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #222;
+}
+
+/* Texto cuando no hay archivos */
+.sin-archivos {
+  font-style: italic;
+  color: #888;
+  padding: 10px;
+  border: 1px dashed #ccc;
+  background-color: #fefefe;
+  border-radius: 8px;
+  max-width: 400px;
+}
+
+/* Mejora visual para cada archivo */
+.archivo-item {
+  padding: 15px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s;
+}
+
+.archivo-item:hover {
+  transform: scale(1.01);
+}
+
+/* Botón eliminar */
+.btn-delete {
+  background-color: #dc3545;
+  padding: 7px 14px;
+  border-radius: 6px;
+  color: white;
+  font-weight: bold;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.btn-delete:hover {
+  background-color: #a71d2a;
+}
+
+
+/* Tooltip al pasar el mouse */
+button:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  background: #333;
+  color: white;
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  top: -30px;
+  left: 0;
+  white-space: nowrap;
+  z-index: 10;
+}
+/* NUEVAS CLASES PARA EL FORMULARIO DENTRO DE contenido-modulo */
+/* Contenedor blanco con sombra */
+.upload-section {
+  background-color: white;
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 24px;
+  border-radius: 24px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Título grande */
+.titulo-modulo {
+  font-size: 24px;
+  font-weight: 700;
+  color: #2d3748; /* gris oscuro */
+  margin-bottom: 20px;
+}
+
+/* Formulario: flex en fila en pantallas anchas, columna en móviles */
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@media(min-width: 640px) {
+  .upload-form {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+/* Input archivo estilo botón */
+.upload-input {
+  flex: 1;
+  padding: 10px 16px;
+  border-radius: 9999px; /* pill shape */
+  border: 1px solid #cbd5e1; /* gris claro */
+  background-color: #f0f9ff;
+  font-size: 14px;
+  color: #334155;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover input */
+.upload-input:hover {
+  background-color: #e0f2fe;
+}
+
+/* Botón azul */
+.upload-button {
+  background-color: #3b82f6; /* azul */
+  color: white;
+  font-weight: 700;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 9999px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover botón */
+.upload-button:hover {
+  background-color: #2563eb;
+}
+
+/* Contenedor lista de archivos */
+.lista-archivos {
+  margin-top: 30px;
+}
+
+/* Mensaje cuando no hay archivos */
+.sin-archivos {
+  font-style: italic;
+  color: #64748b; /* gris medio */
+  font-size: 14px;
+}
+/* Responsividad para tablets */
+@media (max-width: 1024px) {
+  .background-left {
+    left: 150px;
+    width: 400px;
+  }
+  .fixed-left-image {
+    left: 50px;
+    width: 400px;
+  }
+  .right-images-container {
+    width: 600px;
+    grid-template-columns: 1fr 1fr;
+    padding: 20px;
+  }
+}
+
+/* Responsividad para móviles */
+@media (max-width: 768px) {
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: auto;
+  }
+
+  .dashboard-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .background-left {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    margin: 0;
+    z-index: 0;
+  }
+
+  .fixed-left-image {
+    position: relative;
+    left: 0;
+    width: 100%;
+    height: auto;
+    max-height: 350px; /* límite de tamaño vertical */
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    margin-top: 50vh;
+    z-index: 1;
+  }
+
+  .fixed-left-image img {
+    max-height: 350px; /* mismo límite que el contenedor */
+    max-width: 100vw;   /* máximo ancho para que no salga de la pantalla */
+    height: auto;
+    width: auto;
+    object-fit: contain !important;
+    box-shadow: none !important;
+  }
+
+  .right-images-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 10px 20px;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    overflow: visible;
+    z-index: 2;
+  }
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard Administrador</title>
+  <link rel="stylesheet" href="admin-dashboard.css" />
+</head>
+<body>
+  <header class="dashboard-header">
+    <div class="header-title">Panel de Administrador</div>
+    <button id="logoutBtn">Cerrar sesión</button>
+  </header>
+
+  <div class="dashboard-container">
+    <div class="background-left"></div>
+
+    <div class="fixed-left-image">
+      <img src="assets/images/recuadrorojo.png" alt="Imagen fija izquierda" />
+    </div>
+
+    <div class="right-images-container">
+      <div class="image-box"><img src="assets/images/recuadro1.png" alt="Imagen 1" /></div>
+      <div class="image-box"><img src="assets/images/recuadro2.png" alt="Imagen 2" /></div>
+      <div class="image-box"><img src="assets/images/recuadro3.png" alt="Imagen 3" /></div>
+      <div class="image-box"><img src="assets/images/recuadro4.png" alt="Imagen 4" /></div>
+      <div class="image-box"><img src="assets/images/recuadro5.png" alt="Imagen 5" /></div>
+      <div class="image-box placeholder"></div>
+    </div>
+
+    <!-- Contenedor para formulario + archivos dinámicos -->
+    <div id="contenido-modulo" class="contenido-modulo">
+  <section class="upload-section">
+  <h2 class="titulo-modulo">Archivos del módulo</h2>
+
+  <form id="uploadForm" class="upload-form">
+    <input
+      type="file"
+      name="archivo"
+      id="archivo"
+      class="upload-input"
+      required
+    />
+    <button
+      type="submit"
+      class="upload-button"
+    >
+      Subir archivo
+    </button>
+  </form>
+
+  <div id="listaArchivos" class="lista-archivos">
+    <p class="sin-archivos">No hay archivos para este módulo.</p>
+  </div>
+</section>
+
+  </div>
+
+  <script src="admin-dashboard.js"></script>
+</body>
+</html>

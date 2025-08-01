@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Landing</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="fondo">
+
+    <!-- Fondo botones siempre visible -->
+    <img src="assets/images/fondobotones.png" alt="Fondo botones" class="fondo-botones" />
+
+    <!-- Pantalla principal (botones) -->
+    <div class="centro" id="pantalla-principal">
+      <img src="assets/images/registrarse.png" alt="Registrarse" class="boton" id="btnRegistrarse" />
+      <img src="assets/images/iniciarsesion.png" alt="Iniciar sesión" class="boton" id="btnIniciarSesion" />
+    </div>
+
+    <!-- Formulario de registro -->
+<div class="formulario-container oculto" id="formulario-registro">
+  <button type="button" class="atras-btn" id="btnAtrasRegistro">← Volver</button>
+  <form id="registerForm" class="formulario">
+    <input type="email" name="email" placeholder="Email WIPPOST" required />
+    <input type="password" name="password" placeholder="Contraseña" required />
+    <input type="password" name="confirmPassword" placeholder="Confirmar contraseña" required />
+    <button type="submit" class="btn-registrarse">Registrarse</button>
+  </form>
+</div>
+
+<!-- Formulario de inicio de sesión -->
+<div class="formulario-container oculto" id="formulario-login">
+  <button type="button" class="atras-btn" id="btnAtrasLogin">← Volver</button>
+  <form id="loginForm" class="formulario">
+    <input type="email" name="email" placeholder="Email WIPPOST" required />
+    <input type="password" name="password" placeholder="Contraseña" required />
+    <div>
+      <input type="checkbox" id="rememberMe" name="rememberMe"> Recuérdame</label>
+      <a href="/olvide-password.html" class="olvide-password">¿Olvidaste tu contraseña?</a>
+    </div>
+    <button type="submit" class="btn-iniciar">Iniciar sesión</button>
+  </form>
+</div>
+
+    <p id="mensaje"></p>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>
