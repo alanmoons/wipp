@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      const response = await fetch('http://localhost:4000/api/register', {
+      const response = await fetch('https://landingwipp1.onrender.com/api/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password, confirmPassword })
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const password = e.target.password.value;
 
     try {
-      const response = await fetch('http://localhost:4000/api/login', {
+      const response = await fetch('https://landingwipp1.onrender.com/api/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
